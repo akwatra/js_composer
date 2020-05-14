@@ -183,8 +183,10 @@ class Vc_Mapper {
 	public function callElementActivities( $tag ) {
 		do_action( 'vc_mapper_call_activities_before' );
 		if ( isset( $this->element_activities[ $tag ] ) ) {
-			while ( $activity = each( $this->element_activities[ $tag ] ) ) {
-				list( $method, $params ) = $activity[1];
+				//AK - fixed each Bug @14-5-2020
+			foreach ( $this->element_activities as $activity ) {
+            			list( $method, $params ) = $activity;
+           			 //AK- Fixed- Bug \\	
 				switch ( $method ) {
 					case 'drop_param':
 						WPBMap::dropParam( $params['name'], $params['attribute_name'] );
